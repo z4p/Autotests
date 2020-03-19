@@ -6,7 +6,7 @@ from random import choice
 driver = webdriver.Chrome("C:\\Alla_work\\chromedriver.exe")
 driver.get("https://adukar.by/")
 wait = WebDriverWait(driver,200)
-Universities = [
+Universities_march_2020 = [
   'Академия управления при Президенте Республики Беларусь',
   'Белорусский государственный медицинский университет',
   'Белорусский государственный педагогический университет имени Максима Танка',
@@ -68,16 +68,26 @@ Universities = [
   'Ягеллонский университет'
     ]
 
+def find_universities():
+    return choice(Universities_march_2020) #возвращение случайного ВУЗа из списка
+  
+University = find_universities()
+
+
 element = driver.find_elements_by_class_name('icon-label')[0] #кнопка поиск
 element.click()
 element = driver.find_element_by_class_name('ui-autocomplete-input')#кнопка для ввода текста в поиск
- 
-def find_universities():
-    return choice(Universities)
-    
-university = find_universities()
-print ('Университет:',university)
-element.send_keys(university)
+element.send_keys(University)
 element.send_keys(Keys.RETURN)	
+print ('РЕЗУЛЬТАТЫ ПОИСКА: * отображается кнока "Высшие учебные заведения"')
+print ('                   * отображается ВУЗ:',University)
+print ('                   * количество ВУЗов соответвует счетчику на кнопке "Высшие учебные заведения"')
+print ('                   * возможно наличие кнопки "Колледжи и профессиональные лицеи":')
+print('                      - колледжи и профессиональные лицеи являются филиалами ВУЗа:',University)
+print('                      - количество колледжей и профессиональных лицеев соответвует счетчику на кнопке "Колледжи и профессиональные лицеи"')
+print ('                   * возможно наличие кнопки "Новости":')
+print('                      - новости связаны с ВУЗом',University)
+print('                      - количество новостей соответвует счетчику на кнопке "Новости"')	
 	
 assert "Страница не найдена" not in driver.page_source
+
