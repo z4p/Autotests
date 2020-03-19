@@ -6,7 +6,7 @@ from random import choice
 driver = webdriver.Chrome("C:\\Alla_work\\chromedriver.exe")
 driver.get("https://adukar.by/")
 wait = WebDriverWait(driver,200)
-Universities = [
+Universities_march_2020 = [
   'Академия управления при Президенте Республики Беларусь',
   'Белорусский государственный медицинский университет',
   'Белорусский государственный педагогический университет имени Максима Танка',
@@ -68,12 +68,8 @@ Universities = [
   'Ягеллонский университет'
     ]
 
-element = driver.find_elements_by_class_name('icon-label')[0] #кнопка поиск
-element.click()
-element = driver.find_element_by_class_name('ui-autocomplete-input')#кнопка для ввода текста в поиск
- 
 def find_universities():
-    return choice(Universities)
+    return choice(Universities_march_2020)
     
 university = find_universities()
 parts_name_university = university.split()
@@ -82,8 +78,21 @@ def find_part_name_university():
     return choice(parts_name_university)
 
 some_part_name_university = find_part_name_university()
-print ('Часть имени университета:',some_part_name_university)
+
+element = driver.find_elements_by_class_name('icon-label')[0] #кнопка поиск
+element.click()
+element = driver.find_element_by_class_name('ui-autocomplete-input')#кнопка для ввода текста в поиск
 element.send_keys(some_part_name_university)
-element.send_keys(Keys.RETURN)	
+element.send_keys(Keys.RETURN)
+print ('РЕЗУЛЬТАТЫ ПОИСКА: * отображается текст "Результаты поиска по запросу «'+some_part_name_university+'»') 
+print ('                   * отображается кнопка "Высшие учебные заведения"')
+print ('                   * отображается ВУЗ/ВУЗы, найденный/-ые по слову:',some_part_name_university)
+print ('                   * количество ВУЗов соответвует счетчику на кнопке "Высшие учебные заведения"')
+print ('                   * возможно наличие кнопки "Колледжи и профессиональные лицеи":')
+print('                      - колледжи и профессиональные лицеи найденны по слову:',some_part_name_university)
+print('                      - количество колледжей и профессиональных лицеев соответвует счетчику на кнопке "Колледжи и профессиональные лицеи"')
+print ('                   * возможно наличие кнопки "Новости":')
+print('                      - новости связаны с ВУЗом/ВУЗами, найденными по слову "'+some_part_name_university+'"')
+print('                      - количество новостей соответвует счетчику на кнопке "Новости"')	
 	
 assert "Страница не найдена" not in driver.page_source
