@@ -16,6 +16,9 @@ element.send_keys(Login)
 element = driver.find_elements_by_class_name("oauth_form_input")[1]#поле ввода pass в VK
 element.send_keys(Password)
 element.send_keys(Keys.RETURN)
+element = driver.find_elements_by_class_name('icon-label')[1] #кнопка кабинет
+element.click()
+print ('Поздравляю! Вы вошли в личный кабинет.')
 assert "Страница не найдена" not in driver.page_source
 element.clear()
 driver.close()
