@@ -44,7 +44,7 @@ def Lesson_selection():
     return choice(Lessons)
 
 
-# запуск видеоурока: звук, видео, информация, пауза
+# проверка названия урока и предмета урока из списка с названием самого урока и названием видеоурока
 def Lesson_title(Lesson, item_name):
     Lesson_list_1 = driver.find_elements_by_class_name('info') #кнопка "УРОК N" и название и еще что-то
     Length_1 = len(Lesson_list_1)
@@ -84,8 +84,8 @@ def Lesson_title(Lesson, item_name):
                             return 'Название урока из списка уроков НЕ СОВПАДАЕТ с названием урока в самом уроке!'
                     else:
                         return f'Урок "{Lesson}" в разработке'
-    else:
-        return f'работа {Lesson_title_part_1[0]}А проверяется отдельно'
+            else:
+                return f'работа {New_list_1[0]}А проверяется отдельно'
 
 
 
